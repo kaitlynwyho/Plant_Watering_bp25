@@ -1,7 +1,7 @@
 import requests
 
 def get_plant(plant_name):
-    url = 'https://perenual.com/api/v2/species-list?key=Sk-x74867c462ed6565d8922&q=' + plant_name
+    url = 'https://perenual.com/api/v2/species-list?key=sk-GrGi67c47ffd7a5168921&q=' + plant_name
     print(url)
     
     try:
@@ -20,7 +20,7 @@ def get_plant(plant_name):
         return None
 
 def get_plant_info(plant_id):
-    url = "https://perenual.com/api/v2/species/details/" + str(plant_id) + "?key=Sk-x74867c462ed6565d8922"
+    url = "https://perenual.com/api/v2/species/details/" + str(plant_id) + "?key=sk-GrGi67c47ffd7a5168921"
 
     try:
         response = requests.get(url)
