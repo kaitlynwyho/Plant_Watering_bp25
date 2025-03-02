@@ -58,9 +58,9 @@
           ></div>
         </div>
       </div>
-      <script>
-        create();
-      </script>
+      <!--<script>
+        //create();
+      //</script> -->
       <div
         style="
           width: 1069.59px;
@@ -141,6 +141,35 @@
         </div>
       </div>
     </div>
-    <button type="button" onClick="create()">onClick = create()</button>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <script src="loading_animation.js"></script>
+
+    <div id="game-container"></div>
+    <button type="button" id="animationButton">Start Animation</button>
+
+    <script>
+      // Wait for everything to load
+      window.onload = function () {
+        const config = {
+          type: Phaser.AUTO,
+          parent: "game-container",
+          width: 800,
+          height: 600,
+          scene: HomeScene,
+          backgroundColor: "#ffffff",
+        };
+
+        // Create game instance
+        const game = new Phaser.Game(config);
+
+        // Add click handler after everything is loaded
+        document
+          .getElementById("animationButton")
+          .addEventListener("click", () => {
+            const scene = game.scene.getScene("HomeScene");
+            scene.startWatering();
+          });
+      };
+    </script>
   </body>
 </html>
