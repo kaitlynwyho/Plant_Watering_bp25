@@ -1,4 +1,4 @@
-// import Phaser from "phaser";
+import Phaser from "phaser";
 
 class HomeScene extends Phaser.Scene {
   constructor() {
@@ -9,15 +9,11 @@ class HomeScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("wateringCan", "watering-can-svgrepo-com.svg");
-    this.load.image("droplet", "water-drop-icon.png");
-    this.load.image("deadPlant", "dead-plant.png");
-    this.load.image("lessDeadPlant", "less-dead-plant.png");
-    this.load.image("happyPlant", "happy-plant.png");
-    this.load.spritesheet("waterDrops", "water-drop-spritesheet.png", {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
+    this.load.image("wateringCan", "./watering_can.png");
+    this.load.image("droplet", "droplet.png");
+    this.load.image("deadPlant", "sad_plant.png");
+    this.load.image("lessDeadPlant", "mid_plant.png");
+    this.load.image("happyPlant", "happy_plant.png");
   }
 
   create() {
