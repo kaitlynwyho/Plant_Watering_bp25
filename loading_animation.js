@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+//import Phaser from "phaser";
 
 class HomeScene extends Phaser.Scene {
   constructor() {
@@ -9,7 +9,7 @@ class HomeScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("wateringCan", "./watering_can.png");
+    this.load.image("wateringCan", "/watering_can.png");
     this.load.image("droplet", "droplet.png");
     this.load.image("deadPlant", "sad_plant.png");
     this.load.image("lessDeadPlant", "mid_plant.png");
@@ -46,13 +46,13 @@ class HomeScene extends Phaser.Scene {
     this.splashEmitter = splashParticles.createEmitter({
       x: 400,
       y: 430,
-      speedY: { min: -100, max: -50 },
+      speedY: { min: -20, max: -10 },
       speedX: { min: -70, max: 70 },
       gravityY: 300,
       scale: { start: 0.5, end: 0.1 },
       lifespan: 600,
-      quantity: 8,
-      frequency: 100,
+      quantity: 2,
+      frequency: 50,
       on: false  // Replace emitting: false with on: false
     });
 

@@ -32,7 +32,7 @@ def get_plant_info(plant_id):
             print("you suck")
             return None
     except requests.exceptions.RequestException as err:
-        print("Erorr: ", err)
+        print("Error: ", err)
         print("you really suck")
         return None
 
