@@ -18,11 +18,11 @@ class HomeScene extends Phaser.Scene {
 
   create() {
     // Setup plant sprites
-    this.deadPlant = this.add.image(400, 450, "deadPlant");
+    this.deadPlant = this.add.image(400, 300, "deadPlant");
     this.lessDeadPlant = this.add
-      .image(400, 450, "lessDeadPlant")
+      .image(400, 300, "lessDeadPlant")
       .setVisible(false);
-    this.happyPlant = this.add.image(400, 450, "happyPlant").setVisible(false);
+    this.happyPlant = this.add.image(400, 300, "happyPlant").setVisible(false);
 
     // Add watering can sprite
     this.wateringCan = this.add.image(300, 200, "wateringCan");
@@ -50,7 +50,7 @@ class HomeScene extends Phaser.Scene {
       speedX: { min: -70, max: 70 },
       gravityY: 300,
       scale: { start: 0.5, end: 0.1 },
-      lifespan: 600,
+      lifespan: 200,
       quantity: 2,
       frequency: 50,
       on: false  // Replace emitting: false with on: false
@@ -74,7 +74,7 @@ class HomeScene extends Phaser.Scene {
 
     // Reset all visual elements
     this.wateringCan.angle = 0;
-    this.wateringCan.setPosition(300, 200);
+    this.wateringCan.setPosition(650, 200);
     this.emitter.stop();
     this.splashEmitter.stop();
     this.deadPlant.setVisible(false);
@@ -86,6 +86,12 @@ class HomeScene extends Phaser.Scene {
       case 1: // Sad plant, can mid-air stationary
         this.deadPlant.setVisible(true);
         this.humidity = 10; // Very low humidity
+
+        // Set a timer to stop the water after a moment
+        this.time.delayedCall(100, () => {
+          this.emitter.stop();
+          this.splashEmitter.stop();
+        });
         break;
 
       case 2: // Water falling but not hitting, mid-happy plant
@@ -94,11 +100,17 @@ class HomeScene extends Phaser.Scene {
 
         // Tilt watering can
         this.wateringCan.angle = -30;
-        this.wateringCan.setPosition(400, 150);
+        this.wateringCan.setPosition(650, 150);
 
         // Start water emitter
         this.emitter.setPosition(430, 170);
         this.emitter.start();
+
+        // Set a timer to stop the water after a moment
+        this.time.delayedCall(300, () => {
+          this.emitter.stop();
+          this.splashEmitter.stop();
+        });
         break;
 
       case 3: // Water hits plant, not splashing, mid-happy plant
@@ -107,7 +119,7 @@ class HomeScene extends Phaser.Scene {
 
         // Tilt watering can
         this.wateringCan.angle = -30;
-        this.wateringCan.setPosition(400, 150);
+        this.wateringCan.setPosition(650, 150);
 
         // Start water emitter with direct path to plant
         this.emitter.setPosition(430, 170);
@@ -116,24 +128,30 @@ class HomeScene extends Phaser.Scene {
         // Adjust droplet path to hit plant precisely
         this.emitter.setSpeedY({ min: 200, max: 250 });
         this.emitter.setSpeedX({ min: -10, max: 10 });
+
+        // Set a timer to stop the water after a moment
+        this.time.delayedCall(100, () => {
+          this.emitter.stop();
+          this.splashEmitter.stop();
+        });
         break;
 
       case 4: // Water hits plant, splashing, happy plant
         this.happyPlant.setVisible(true);
         this.humidity = 90;
 
-        // Watering can returns to stationary position
-        this.wateringCan.setPosition(300, 200);
-
         // Show water already falling (not coming from can)
         this.emitter.setPosition(400, 300);
         this.emitter.start();
-
+ 
         // Add splash effect
         this.splashEmitter.start();
 
+        // Watering can returns to stationary position
+        this.wateringCan.setPosition(650, 200);
+
         // Set a timer to stop the water after a moment
-        this.time.delayedCall(2000, () => {
+        this.time.delayedCall(100, () => {
           this.emitter.stop();
           this.splashEmitter.stop();
         });

@@ -15,7 +15,7 @@ def get_plant(plant_name):
             print("you suck")
             return None
     except requests.exceptions.RequestException as err:
-        print("Erorr: ", err)
+        print("Error: ", err)
         print("you suck pt 2")
         return None
 
