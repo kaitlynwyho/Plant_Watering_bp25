@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+// import Phaser from "phaser";
 
 class HomeScene extends Phaser.Scene {
   constructor() {
@@ -9,11 +9,15 @@ class HomeScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("wateringCan", "watering_can.png");
-    this.load.image("droplet", "droplet.png");
-    this.load.image("deadPlant", "sad_plant.png");
-    this.load.image("lessDeadPlant", "mid_plant.png");
-    this.load.image("happyPlant", "happy_plant.png");
+    this.load.image("wateringCan", "watering-can-svgrepo-com.svg");
+    this.load.image("droplet", "water-drop-icon.png");
+    this.load.image("deadPlant", "dead-plant.png");
+    this.load.image("lessDeadPlant", "less-dead-plant.png");
+    this.load.image("happyPlant", "happy-plant.png");
+    this.load.spritesheet("waterDrops", "water-drop-spritesheet.png", {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
   }
 
   create() {
@@ -28,7 +32,8 @@ class HomeScene extends Phaser.Scene {
     this.wateringCan = this.add.image(300, 200, "wateringCan");
 
     // Create particle emitter for water droplets
-    this.emitter = this.add.particles(0, 0, "droplet", {
+    const particles = this.add.particles('droplet');
+    this.emitter = particles.createEmitter({
       x: 400,
       y: 150,
       speedY: { min: 100, max: 200 },
@@ -37,11 +42,12 @@ class HomeScene extends Phaser.Scene {
       lifespan: 1500,
       quantity: 2,
       frequency: 50,
-      emitting: false,
+      on: false  // Replace emitting: false with on: false
     });
 
     // Create splash emitter
-    this.splashEmitter = this.add.particles(0, 0, "droplet", {
+    const splashParticles = this.add.particles('droplet');
+    this.splashEmitter = splashParticles.createEmitter({
       x: 400,
       y: 430,
       speedY: { min: -100, max: -50 },
@@ -51,7 +57,7 @@ class HomeScene extends Phaser.Scene {
       lifespan: 600,
       quantity: 8,
       frequency: 100,
-      emitting: false,
+      on: false  // Replace emitting: false with on: false
     });
 
     // Setup input handling
@@ -173,4 +179,5 @@ class HomeScene extends Phaser.Scene {
   }
 }
 
-export default HomeScene;
+// export default HomeScene;
+window.HomeScene = HomeScene;
